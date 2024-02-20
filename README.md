@@ -34,7 +34,7 @@ watch -n 1 curl --silent http://localhost:8080/math/info?n=16
 
 The cache was created by Quarkus and is used by the app.
 
-#### 4. In another console, restart the Infinispan cache
+#### 4. In another console, kill and run a new Infinispan cache
 
 *This is a simulation of what happens when my Infinispan server pod is terminated on my k8s cluster and another one is starting.*
 
@@ -53,7 +53,27 @@ Failed to write in cache: org.infinispan.server.hotrod.CacheNotFoundException: C
 
 The cache/schema wasn't created in Infinispan by Quarkus so the app can't use the cache. If I stop my app and restart it then the caches are created.
 
-**Here's the question: what is the best/recommanded way to create the caches/schemas without restarting the Quarkus app?**
+**Here's the question: what is the best/recommanded way to create the caches/schemas without restarting the Quarkus app? Is there a way to run what the `use-schema-registration` option does but on demand in a running app?**
+
+## Solutions
+
+#### 1. Auto recovery from the app
+
+This is what I tried [here](https://github.com/jdussouillez/quarkus-infinispan-cache-reset/blob/463bf68f19afc0575b6badba1c4944db4ab1c849/src/main/java/com/github/jdussouillez/CacheService.java#L69) but it seems dirty (and more important: it's broken, my app behavior is weird after executing this).
+
+What other solutions do I have?
+
+#### 2. Restart the Quarkus app
+
+Monitor the Infinispan server and rollout the application pods when it's killed.
+
+Would work but seems like a hack too.
+
+#### 3. Externalize the schemas/caches
+
+Disable the `use-schema-registration` option, externalize the protobuf files and let Kubernetes/ArgoCD register the schemas/create the caches when Infinispan starts?
+
+Would work too I guess but I would like to keep maintaining protobufs in the app code (and generated with `@AutoProtoSchemaBuilder` annotations).
 
 ## Cleanup
 
