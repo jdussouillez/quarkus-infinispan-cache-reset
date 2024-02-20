@@ -12,7 +12,7 @@ See XXXX
 
 ## Run
 
-1. Start the Infinispan cache
+#### 1. Start the Infinispan cache
 
 ```sh
 docker run --name infinispan-reset-test -d --rm -it -p 11222:11222 -e USER="user" -e PASS="hunter2" quay.io/infinispan/server:14.0
@@ -20,13 +20,13 @@ docker run --name infinispan-reset-test -d --rm -it -p 11222:11222 -e USER="user
 
 *Console: http://localhost:11222/console/*
 
-2. Run the app
+#### 2. Run the app
 
 ```sh
 java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-3. Send requests to the API every seconds
+#### 3. Send requests to the API every seconds
 
 ```sh
 watch -n 1 curl --silent http://localhost:8080/math/info?n=16
@@ -34,7 +34,9 @@ watch -n 1 curl --silent http://localhost:8080/math/info?n=16
 
 The cache was created by Quarkus and is used by the app.
 
-4. In another console, restart the Infinispan cache (simulation of a Kubernetes pod failing and another one starting)
+#### 4. In another console, restart the Infinispan cache
+
+*This is a simulation of what happens when my Infinispan server pod is terminated on my k8s cluster and another one is starting.*
 
 ```sh
 docker stop infinispan-reset-test && \
