@@ -57,23 +57,7 @@ The cache/schema wasn't created in Infinispan by Quarkus so the app can't use th
 
 ## Solutions
 
-#### 1. Auto recovery from the app
-
-This is what I tried [here](https://github.com/jdussouillez/quarkus-infinispan-cache-reset/blob/master/src/main/java/com/github/jdussouillez/CacheService.java#L78) but it seems dirty (and more important: **it's broken**, my app behavior is weird after executing this and the schemas/caches are not created everytime).
-
-Is there another (and best) way to do this?
-
-#### 2. Restart the Quarkus app
-
-Monitor the Infinispan server and rollout the application pods when it's killed.
-
-Would work but seems like a hack too.
-
-#### 3. Externalize the schemas/caches
-
-Disable the `use-schema-registration` option, externalize the protobuf files and let Kubernetes/ArgoCD register the schemas/create the caches when Infinispan starts?
-
-Would work too I guess but I would like to keep maintaining protobufs in the app code (and generated with `@AutoProtoSchemaBuilder` annotations).
+See https://github.com/quarkusio/quarkus/discussions/38877#discussion-6243587
 
 ## Cleanup
 
