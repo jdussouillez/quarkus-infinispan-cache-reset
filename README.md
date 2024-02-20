@@ -59,9 +59,9 @@ The cache/schema wasn't created in Infinispan by Quarkus so the app can't use th
 
 #### 1. Auto recovery from the app
 
-This is what I tried [here](https://github.com/jdussouillez/quarkus-infinispan-cache-reset/blob/463bf68f19afc0575b6badba1c4944db4ab1c849/src/main/java/com/github/jdussouillez/CacheService.java#L69) but it seems dirty (and more important: it's broken, my app behavior is weird after executing this).
+This is what I tried [here](https://github.com/jdussouillez/quarkus-infinispan-cache-reset/blob/master/src/main/java/com/github/jdussouillez/CacheService.java#L78) but it seems dirty (and more important: **it's broken**, my app behavior is weird after executing this and the schemas/caches are not created everytime).
 
-What other solutions do I have?
+Is there another (and best) way to do this?
 
 #### 2. Restart the Quarkus app
 
