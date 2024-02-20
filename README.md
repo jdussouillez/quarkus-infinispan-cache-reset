@@ -2,7 +2,7 @@
 
 Project to reproduce a "reset" of the Infinispan cache and the way Quarkus handles it.
 
-See XXXX
+See https://github.com/quarkusio/quarkus/discussions/38877
 
 ## Build
 
