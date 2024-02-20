@@ -39,7 +39,7 @@ The cache was created by Quarkus and is used by the app.
 *This is a simulation of what happens when my Infinispan server pod is terminated on my k8s cluster and another one is starting.*
 
 ```sh
-docker stop infinispan-reset-test && \
+docker rm --force infinispan-reset-test && \
     docker run --name infinispan-reset-test -d --rm -it -p 11222:11222 -e USER="user" -e PASS="hunter2" quay.io/infinispan/server:14.0
 ```
 
@@ -53,10 +53,10 @@ Failed to write in cache: org.infinispan.server.hotrod.CacheNotFoundException: C
 
 The cache/schema wasn't created in Infinispan by Quarkus so the app can't use the cache. If I stop my app and restart it then the caches are created.
 
-**Here's the question: what is the best way to create the caches/schemas without restarting the Quarkus app?**
+**Here's the question: what is the best/recommanded way to create the caches/schemas without restarting the Quarkus app?**
 
 ## Cleanup
 
 ```sh
-docker stop infinispan-reset-test
+docker rm --force infinispan-reset-test
 ```
