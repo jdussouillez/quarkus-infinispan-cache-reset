@@ -88,6 +88,8 @@ public class CacheRecoveryService {
             .authentication()
             .username(username)
             .password(password);
+        // Schemas
+        SCHEMAS.forEach(confBuilder::addContextInitializer);
         // Caches
         originalConf.remoteCaches().values().forEach(cache ->
             confBuilder
