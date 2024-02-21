@@ -55,6 +55,8 @@ The cache/schema wasn't created in Infinispan by Quarkus so the app can't use th
 
 **Here's the question: what is the best/recommanded way to create the caches/schemas without restarting the Quarkus app? Is there a way to run what the `use-schema-registration` option does but on demand in a running app?**
 
+- **Edit 1: I managed to get a working recovery from the app code itself. See branch [`code-recovery`](https://github.com/jdussouillez/quarkus-infinispan-cache-reset/tree/code-recovery). I don't really know why but I had to duplicate the `RemoteCacheManager` instance (the one injected by Quarkus) to get it working ([code](https://github.com/jdussouillez/quarkus-infinispan-cache-reset/blob/code-recovery/src/main/java/com/github/jdussouillez/CacheRecoveryService.java#L45)).**
+
 ## Solutions
 
 See https://github.com/quarkusio/quarkus/discussions/38877#discussion-6243587
