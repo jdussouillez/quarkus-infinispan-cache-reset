@@ -43,8 +43,7 @@ public class CacheRecoveryService {
             return;
         }
         System.out.println("Cache recovery in progress...");
-        var recoveryCacheManager = duplicateCacheManager();
-        try {
+        try (var recoveryCacheManager = duplicateCacheManager()) {
             // Register schemas
             RemoteCache<String, String> metadataCache = recoveryCacheManager
                 .getCache(ProtobufMetadataManagerConstants.PROTOBUF_METADATA_CACHE_NAME);
@@ -59,8 +58,6 @@ public class CacheRecoveryService {
             System.out.println("Cache recovery completed");
         } catch (RuntimeException ex) {
             System.err.println("Error when recovering Infinispan: " + ex.getMessage());
-        } finally {
-            recoveryCacheManager.stop();
         }
     }
 
